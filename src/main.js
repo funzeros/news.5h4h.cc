@@ -21,7 +21,8 @@ const store = new Vuex.Store({
     isActive: 0,
     load: true,
     collection: [],
-    likeImg: require("./assets/like.png")
+    likeImg: require("./assets/like.png"),
+    adList:null
   },
   mutations: {
     muChannels(state, data) {
@@ -58,6 +59,9 @@ const store = new Vuex.Store({
     },
     muLikeImg(state, url) {
       state.likeImg = url
+    },
+    setAd(state,data){
+      state.adList = data
     }
   },
   actions: {
@@ -76,6 +80,16 @@ const store = new Vuex.Store({
           .then(res => {
             commit('muGetData', res.data)
             store.state.load = false
+          })
+          resolve()
+      })
+    },
+    getAd({ commit,state }){
+      return new Promise((resolve,reject)=>{
+        axios.get('http://fate.5h4h.cc/be/adverPHP/getAllAd.php')
+          .then(res => {
+            // console.log(res.data)
+            commit('setAd',res.data)
           })
           resolve()
       })

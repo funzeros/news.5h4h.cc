@@ -16,8 +16,8 @@
           <img src="../assets/loading.png">
         </div>
         <!-- <carousel v-show="this.$store.state.channelIndex === 0"></carousel> -->
-        <div class="section" v-for="(item, index) in newData" @click="toDetail(item, index)" :key="item.title">
-          <div class="news">
+        <div class="section" v-for="(item, index) in newData" :key="item.title">
+          <div class="news"  @click="toDetail(item, index)">
             <div class="news-left">
               <img :src="item.pic || require('../assets/logo.png')" alt="">
             </div>
@@ -29,6 +29,9 @@
               </div>
             </div>
           </div>
+          <div class="adver" v-if="index%5===4">
+            <adver/>
+          </div> 
         </div>
       </div>
     </div>
@@ -36,15 +39,18 @@
 </template>
 
 <script>
-import carousel from '@/components/carousel'
+// import carousel from '@/components/carousel'
+import adver from '@/components/adver'
 export default {
   components: {
-    carousel
+    // carousel
+    adver
   },
   created() {
     this.$store.dispatch('acChannels')
     this.$store.dispatch('acGetData', '头条')
     this.$store.commit('loading', true)
+    this.$store.dispatch('getAd')
   },
   computed: {
     channels() {
@@ -162,7 +168,7 @@ export default {
 }
 .section {
   width: 100%;
-  height: 2.5rem;
+  /* height: 2.5rem; */
   border-bottom: 1px solid #ccc;
 }
 .news {
