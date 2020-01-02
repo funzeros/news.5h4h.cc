@@ -11,6 +11,7 @@ import collectDetail from '@/page/collectDetail'
 Vue.use(Router)
 
 export default new Router({
+  base:'/news/',
   mode: 'history',
   routes: [
     {

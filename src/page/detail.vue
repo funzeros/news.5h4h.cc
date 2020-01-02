@@ -96,7 +96,9 @@ export default {
   font-size: 18px;
   line-height: 30px;
 }
-video{
-  width: 100%;
+.newsContent video{
+  width: 100%!important;
+
 }
+
 </style>
